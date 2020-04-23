@@ -13,4 +13,13 @@ class UserController(val userService: UserService) {
 
     @GetMapping("users")
     fun getAll() =  userService.findAll()
+
+    @GetMapping("users/{id}")
+    fun getUser(@PathVariable id: Long) = userService.findById(id)
+
+    @PutMapping("user/{id}")
+    fun updateUser(@RequestBody user: User) = userService.update(user)
+
+    @DeleteMapping("user/{id}")
+    fun deleteUser(@PathVariable id: Long) = userService.delete(id)
 }

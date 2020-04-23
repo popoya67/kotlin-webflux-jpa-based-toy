@@ -16,4 +16,17 @@ class UserHandler(val userService: UserService) {
     }
 
     fun findAll(serverRequest: ServerRequest)  = ServerResponse.ok().body(userService.findAll())
+
+    fun find(serverRequest: ServerRequest) = ServerResponse.ok().body(userService.findById(serverRequest.pathVariable("id").toLong()))
+
+    fun delete(serverRequest: ServerRequest) = userService.delete(serverRequest.pathVariable("id").toLong()).flatMap {
+        ServerResponse.ok().build()
+    }
+
+    fun update(serverRequest: ServerRequest) = serverRequest.bodyToMono(User::class.java).map {
+        userService.update(it)
+    }.flatMap {
+        ServerResponse.ok().body(it)
+    }
+
 }

@@ -8,10 +8,8 @@ import javax.persistence.Id
 @Entity
 data class User(
         @Id
-        @GeneratedValue(strategy= GenerationType.IDENTITY)
+        @GeneratedValue
         var id: Long,
-
         var name: String,
-
         var age: Int
 ){}

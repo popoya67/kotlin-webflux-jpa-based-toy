@@ -12,6 +12,9 @@ class UserRouter(private val userHandler: UserHandler) {
     fun userRoutes() = router{
         "/user".nest{
             POST("/register", userHandler::register)
+            GET("/{id}", userHandler::find)
+            DELETE("/{id}", userHandler::delete)
+            PUT("{id}", userHandler::update)
         }
         "/users".nest{
             GET("", userHandler::findAll)
